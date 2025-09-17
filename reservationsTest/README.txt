@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS reservations (
 
 Αν χρησιμοποιείτε XAMPP: Αντιγράψτε τον φάκελο μέσα στον htdocs.
 
-Στο αρχείο confing.php, αλλάξτε τις παραμέτρους ώστε να αντιστοιχούν με τις δικές σας.
+Στο αρχείο config.php, αλλάξτε τις παραμέτρους ώστε να αντιστοιχούν με τις δικές σας.
 ----
 $DBHost = "localhost"; 
 $DBUser = "root"; 
@@ -142,5 +142,6 @@ DELETE  /deleteBooking.php
 {"Status" : "ERROR", "Message" :"No record found"}
 {"Status" : "ERROR", "Message" : "Prepare failed"}
 {"Status" : "ERROR", "Message" : "Execution failed"}
+
 
 {"Status" : "ERROR", "Message" : "Missing parameters"}
