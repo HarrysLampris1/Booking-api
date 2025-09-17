@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "e08a9fc3-679e-49ed-ab27-af2be571ae9a",
+		"name": "TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27748909"
+	},
+	"item": [
+		{
+			"name": "insertBooking.php",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Valid POST returns success\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json.Status).to.equal(\"OK\"); // \r",
+							"    pm.expect(json.Message).to.equal(\"Successfully inserted\"); \r",
+							"    pm.expect(json.reservation_id).to.be.a(\"number\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Γιάννης Παπαδόπουλος\",\r\n    \"reservation_date\": \"2025-09-20\",\r\n    \"guests\": 4\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/reservationsTest/insertBooking.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"reservationsTest",
+						"insertBooking.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBooking.php",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"GET returns array of reservations\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json).to.be.an(\"array\");\r",
+							"    if (json.length > 0) {\r",
+							"        pm.expect(json[0]).to.have.keys(\"id\", \"name\", \"reservation_date\", \"guests\");\r",
+							"        pm.expect(json[0].id).to.be.a(\"number\");\r",
+							"        pm.expect(json[0].guests).to.be.a(\"number\");\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/reservationsTest/getBooking.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"reservationsTest",
+						"getBooking.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateBooking.php",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Valid PUT updates reservation\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json.Status).to.equal(\"OK\");\r",
+							"    pm.expect(json.Message).to.be.oneOf([\"Successfully updated\", \"No rows affected\"]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Γιάννης Παπαδόπουλος\",\r\n    \"reservation_date\": \"2025-09-21\",\r\n    \"guests\": 5\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/reservationsTest/updateBooking.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"reservationsTest",
+						"updateBooking.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBooking.php",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Valid DELETE removes reservation\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const json = pm.response.json();\r",
+							"    pm.expect(json.Status).to.equal(\"OK\");\r",
+							"    pm.expect(json.Message).to.be.oneOf([\"Successfully deleted\", \"No record found\"]);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/reservationsTest/deleteBooking.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"reservationsTest",
+						"deleteBooking.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
